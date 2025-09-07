@@ -23,33 +23,46 @@
         </div>
 
         <div id="background" class="content">
-            <p>Introduction to the workshop</p>
-            <p>If you took part in the workshop and want ideas of how to continue, jump here! ADD LINK TO ACCELERATION SECTION</p>
-            <p>Jump to...</p>
+            <h2>ADD introduction to the workshop</h2>
+            <p>If you took part in the workshop and want ideas of how to continue, <a href="#next-steps">jump here</a>!</p>
+            <p>Navigate to:</p>
             <ol>
-                <li>Getting Started - connecting your microbit and testing the starter code</li>
-                <li>Send messages to Ground Control - add radio and name your satellite</li>
-                <li>Checking light levels - Are you seeing the solar energy? Send an error to Ground Control</li>
-                <li>Checking acceleration - Are you in a stable orbit? Send an error to Ground Control</li>
+                <li><a href="#setup">Getting Started</a> - connecting your microbit and testing the starter code</li>
+                <li><a href="#radio">Send messages to Ground Control</a> - adding radio and naming your satellite</li>
+                <li><a href="#light">Check light levels</a> - checking solar energy and sending errors to Ground Control</li>
+                <li><a href="#acceleration">Checking acceleration</a> - checking for stable orbit</li>
             </ol>
         </div>
 
         <div id="setup" class="content">
             <h2 class="content-subhead bg-yellow">Getting Started</h2>
+
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <img class="pure-img-responsive" src="https://cdn.sanity.io/images/ajwvhvgo/production/4de361b622ac9bf5e8b9c3109a3935dd47b96167-1490x609.png" alt="Diagram of a micro:bit showing the front and back. Arrows are pointing to different sections. Click the link below to more information.">
+                </div>
+            </div> 
+            <sub><a href="https://images.nasa.gov/details/iss033e009285" target="_blank">Image from micro:bit</a></sub>
+
             <p>In a new tab, go to the <a href="https://python.microbit.org/" target="_blank">Micro:bit Python Editor</a>.</p>
             <p>Before changing any code, get your micro:bit connected:</p>
             <ol>
                 <li>Plug the micro:bit into your computer</li>
-                <li>Click the purple 'Send to micro:bit' button on the bottom left</li>
+                <li>Click the purple <strong>Send to micro:bit</strong> button on the bottom left</li>
                 <li>Follow the onscreen instructions to pair your micro:bit</li>
             </ol>
             <p>Does your physical micro:bit scroll 'Hello' and show you a heart?</p>
             <p>If yes, well done! You can start changing the code - see below for some ideas.</p>
             <p>If no, try again, then see <a href="https://microbit.org/get-started/user-guide/transfer-code-to-the-microbit/#introduction" target="_blank">the micro:bit user guide</a> for some troubleshooting ideas.</p>
             <br>
-            <p>ADD SCREENSHOT OF CODE</p>
+            <pre>from microbit import *
+
+while True:
+    display.show(Image.HEART)
+    sleep(1000)
+    display.scroll()</pre>
             <br>
-            <p>Try out the ideas below. It's a good idea to change one thing at a time - test your changes by clicking 'Send to micro:bit' again.</p>
+            <p>Try out the ideas below. It's a good idea to change one thing at a time - test your changes by clicking <strong>Send to micro:bit</strong> again.</p>
             <ol>
                 <li>Change the <code>HEART</code> image to something else - watch out for capital letters!</li>
                 <li>Change <code>'Hello'</code> to some other text such as your name - be careful of the apostrophes!</li>
@@ -61,18 +74,117 @@
 
         <div id="radio" class="content">
             <h2 class="content-subhead bg-blue">Radio Ground Control</h2>
-            <p>...</p>
+
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <img class="pure-img-responsive" src=".\images\Satellites-Connected.gif" alt="Screenshot of Ground Control's printout. At the top is the heading 'micro:bit flashed' and a tickmark. Underneath is a scrolling screen showing different satellites connected, for example 'ISS connected', 'PyConUK connected', Satellite 5 connected'.">
+                </div>
+            </div>
+
+            <p>It is important that your satellite has a way of communicating with the scientists back on Earth.</p>
+            <p>The micro:bit at the front is Ground Control - it is set up to receive the messages that you send and display them.</p>
+            <p><em>To set this up for yourself at home, <a href="https://raw.githubusercontent.com/Isioviel/PyConUK2025/refs/heads/main/examples/GroundControl.py" target="_blank">click here for the Ground Control code</a>.</em></p>
+            <br>
+            <p>To send your messages, you first need to set up the radio, then send your message.</p>
+            <p>Add the new lines of code starting on line 3</p>
+            <ul>
+                <li><strong>After</strong> <code>: from microbit import *</code></li>
+                <li><strong>Before</strong> <code>: while True</code></li>
+            </ul>
+            <pre>import radio
+radio.on()
+            </pre>
+            <p>Now, pick a name for your satellite - use something short to leave space for error messages. <em>There is a limit of 29 characters, a longer string will be cut short and not displayed by Ground Control.</em></p>
+            <p>Then on the next line, use this syntax to send Ground Control a message:</p>
+            <pre>radio.send('PyConUK connected')</pre>
+            <br>
+
+            <p>Now that you have a way to communicate with Ground Control, you can start sending useful messages.</p>
+            <p>In the next two sections, you will get data from the micro:bits sensors and check that they are as you expect. If they are not, you can let Ground Control know!</p>
         </div>
 
         <div id="light" class="content">
             <h2 class="content-subhead bg-orange">Check Solar Power</h2>
-            <p>...</p>
-            <p>LINK Extension idea: adjust the brightness levels</p>
+            
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <img class="pure-img-responsive" src="https://images-assets.nasa.gov/image/iss033e009285/iss033e009285~small.jpg" alt="ISS033-E-009285 (4 Oct. 2012) --- Several tiny satellites are featured in this image photographed by an Expedition 33 crew member on the International Space Station. The satellites were released outside the Kibo laboratory using a Small Satellite Orbital Deployer attached to the Japanese module’s robotic arm on Oct. 4, 2012. Japan Aerospace Exploration Agency astronaut Aki Hoshide, flight engineer, set up the satellite deployment gear inside the lab and placed it in the Kibo airlock. The Japanese robotic arm then grappled the deployment system and its satellites from the airlock for deployment. A portion of the station’s solar array panels and a blue and white part of Earth provide the backdrop for the scene.">
+                </div>
+            </div> 
+            <sub><a href="https://images.nasa.gov/details/iss033e009285" target="_blank">Image from NASA</a></sub>
+
+            <p>The display of the micro:bit is also its light sensor. You will use this to check how much light the micro:bit can sense.</p>
+            <p>Before you can send useful information to Ground Control, you need to work out what is a 'normal' light level for your satellite.</p>
+            <br>
+            <p><strong>Inside your</strong><code> while True </code> loop, add this code:</p>
+            <pre>    light = display.read_light_level()
+    print(light)
+            </pre>
+            <p>Click the <strong>Show serial</strong> button on the bottom right - this will open the <strong>terminal</strong> like this:</p>
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <img class="pure-img-responsive" src=".\images\Light-Levels.png" alt="Screenshot of the code described above. Underneath is the open terminal, showing some numbers: 108,109,105,105,108,108.">
+                </div>
+            </div>
+            <p>What are the light levels like in your area?</p>
+            <ul>
+                <li>On the table?</li>
+                <li>When you are holding it?</li>
+                <li>Under the table?</li>
+                <li>When you shine a torch on it?</li>
+            </ul>
+            <p><em>If your program is running too slowly, delete some of the other code inside your while loop!</em></p>
+            <br>
+            <p>If your micro:bit's normal light levels, when sat on the table, are about 100, you can send a warning to Ground Control when it gets too low, using code like this:</p>
+            <pre>    if light < 80:
+        radio.send('PyConUK low power')</pre>
+            <p><strong>Challenge:</strong> At the moment, you don't care if there is <strong>too much</strong> light, you only care if the satellite is running out of power. Can you add further code to send a warning when the light levels are much higher than normal?</p>
         </div>
 
         <div id="acceleration" class="content">
-            <h2 class="content-subhead bg-orange">Check Orbit</h2>
-            <p>...</p>
+            <h2 class="content-subhead bg-yellow">Check Orbit</h2>
+
+            <div class="pure-g">
+                <div class="pure-u-1-1">
+                    <img class="pure-img-responsive" src="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2020/03/reaching_orbit/21862513-11-eng-GB/Reaching_orbit_pillars.jpg" alt="Orbit diagram. Click the link below for full description.">
+                </div>
+            </div>
+            <sub><a href="https://www.esa.int/Enabling_Support/Space_Transportation/Types_of_orbits" target="_blank">Image ©ESA</a></sub>
+
+            <p>Another important thing to warn Ground Control about, is if your satellite's orbit is not stable. We can check this by sensing the <strong>acceleration</strong>.</p>
+            <p>When a satellite is orbiting the Earth, it is travelling at a <strong>constant velocity</strong>, meaning that the only acceleration it feels is that of gravity.</p>
+            <ul>
+                <li>If it starts to speed up, it will exit the atmosphere and fly off into space - useful for rockets.</li>
+                <li>If it starts to slow down, it will get pulled back down to earth by gravity - useful when the satellite has reached the end of its life.</li>
+            </ul>
+            <br>
+            <p>Using similar code to the light sensing, you can see what acceleration the micro:bit senses when it is not moving:</p>
+            <p><strong>Inside your</strong><code> while True </code> loop, add this code:</p>
+            <pre>    acc = accelerometer.get_strength()
+    print(acc)
+            </pre>
+            <p>Click the <strong>Show serial</strong> button on the bottom right to see the data.</p>
+            <p>What are the acceleration levels like?</p>
+            <ul>
+                <li>On the table?</li>
+                <li>When you pick it up?</li>
+                <li>When you knock the table?</li>
+            </ul>
+            <p>Can you work out how to send warning messages for an unstable orbit? <em>Look carefully at your light sensing code for a hint.</em></p>
+        </div>
+
+        <div id="next-steps" class="content">
+            <h2 class="content-subhead bg-blue">What next?</h2>
+            <p>You have made some great progress on your satellite model, well done!</p>
+            <p>If you would like to keep going, there are some ideas below.</p>
+            <ul>
+                <li><strong>Check for a stable orbit.</strong> If we did not have time to do this during the workshop, <a href="#acceleration">click here for the code example and instructions</a>.</li>
+                <li><strong>Add sound effects.</strong> Sound can't travel in space, but it can be useful for scientists and engineers during testing. Can you add a noise every time you send an error message?</li>
+                <li><strong>Challenging</strong>: <a href="brightness.html" target="_blank">adjust the display brightness when low on power</a>.</li>
+                <li><strong>Explore other sensors.</strong> Look through the <strong>Reference</strong> menu to see some of the other sensors you could use - what do you think would be useful for a satellite?</li>
+            </ul>
+            <br>
+            <p><a href="https://raw.githubusercontent.com/Isioviel/PyConUK2025/refs/heads/main/examples/WorkingSatellite.py" target="_blank">Click here</a> for a working code example (not including the extra ideas).</p>
         </div>
 
     </div>
