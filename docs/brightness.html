@@ -21,22 +21,62 @@
         <div class="header">
             <h1>Code a Satellite</h1>
             <h2>Adjust the Brightness</h2>
+            <h5>... instructions still in progress (code works) ...</h5>
         </div>
 
         <div class="content">
-            <p>Why adjust the brightness?...</p>
+            <p>If your satellite isn't getting enough solar energy, you could reduce the brightness of the micro:bit's display to save power.</p>
+            <p>The code for this is more complex than what you have done so far, and you need to add in some <strong>functions</strong>.</p>
+            <p>The code you need, and an explanation of how it works, is below. Make sure that you put the code in the right section of your code!</p>
             <br>
 
             <h3>Map light level to brightness</h3>
-            <p>...what the function does, how to add it...</p>
+            <p>When you checked the light levels in the room, you saw the range of values. The micro:bit gives you a value between 0 and 255 - but you may have noticed a smaller range depending on how bright the room is!</p>
+            <p>The brightness of the screen only goes between 0 (off) and 9 (maximum brightness). This means that we cannot put the values from the light sensor directly into the brightness value of the screen without causing errors.</p>
+            <br>
+            <p>The two functions below set up the maths needed to say, for example:</p>
+            <ul>
+                <li>If light level = 255, set brightness to 9</li>
+                <li>If light level = 0, set brightness to 1</li>
+                <li>If light level = 125, set brightness to 5</li>
+                <li>... and so on ...</li>
+            </ul>
+            <p>If the brightness of a pixel <strong>is not zero</strong> then it will change the brightness. If the pixel is let to zero, it will stay that way, so your picture should stay visible.</p>
+            <br>
+            <pre>def map(value, fromMin, fromMax, toMin, toMax):
+    fromRange = fromMax - fromMin
+    toRange = toMax - toMin
+    valueScaled = float(value - fromMin) / float(fromRange)
+    return int(toMin + (valueScaled * toRange))</pre>
             <br>
 
-            <h3>Adjust the display's brightness</h3>
-            <p>...what the function does, how to add it...</p>
+            <pre>def change_brightness():
+    for y in range(5):
+        for x in range(5):
+            if display.get_pixel(x, y) != 0:
+                display.set_pixel(x, y, brightness)</pre>
             <br>
 
             <h3>Using the functions</h3>
-            <p>...</p>
+            <p>Add both of the above functions into your code <strong>above the while True loop</strong>.</p>
+            <p>Next, set the starting brightness (I choose the maximum brightness!), and a picture to use for testing (if you don't already have one in your code):</p>
+            <pre>brightness = 9
+display.show(Image.DUCK)</pre>
+            <p>You should now have lots of code above your while loop - this sets everything up.</p>
+            <p><strong>Test your new code to make sure there are no errors</strong> - do you see the picture you chose?</p>
+            <br>
+            <p>Finally, you can use the functions you have set up.</p>
+            <p>To do this, you need to decide on your light range:</p>
+            <ul>
+                <li>minimum light value, e.g. 0</li>
+                <li>maximum light value, e.g. 150</li>
+                <li>minimum brightness value, e.g. 1</li>
+                <li>maximum brightness value, e.g. 9</li>
+            </ul>
+            <p>To use the code, it must be inside your while loop, and <strong>after</strong> you have checked the light level.</p>
+            <p>Add the two lines of code below, changing the numbers to match your own range.</p>
+            <pre>    brightness = map(light, 0, 150, 1, 9)
+    change_brightness()</pre>
             <br>
         </div>
 
